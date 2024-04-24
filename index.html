@@ -6,18 +6,79 @@
             <style>
                 body {
                     padding: 20px;
+                    background-color: #f8f9fa;
+                    color: #333;
                 }
                 .table-container {
                     width: 75%;
                     margin: auto;
+                    background-color: #fff;
+                    padding: 20px;
+                    border-radius: 10px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                }
+                .nav-tabs {
+                    border: none;
+                    border-radius: 10px;
+                    margin-bottom: 20px;
+                }
+                .nav-tabs .nav-link {
+                    color: #333;
+                    border: none;
+                    background-color: transparent;
+                    padding: 10px 15px;
+                    margin-right: 5px;
+                    border-radius: 10px;
+                    transition: background-color 0.3s;
+                }
+                .nav-tabs .nav-link.active {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border: none;
+                }
+                .nav-tabs .nav-link:not(.active):hover {
+                    background-color: #eee;
+                    color: #333;
+                }
+                .tab-content {
+                    padding: 10px;
+                }
+                .table {
+                    background-color: #fff;
                 }
                 .winner {
-                    color: green;
-                    font-weight: bold;
+                    color: #218838;
+                    font-weight: normal;
                 }
                 .loser {
-                    color: red;
+                    color: #c82333;
+                    font-weight: normal;
+                }
+                h1, h2, h3, h4, h5, h6 {
+                    color: #dc3545;
+                    margin-bottom: 15px;
+                }
+                th {
                     font-weight: bold;
+                    color: #000;
+                }
+                .nav-link.active {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border-color: #dc3545;
+                }
+                .nav-link {
+                    background-color: #fff;
+                    color: #dc3545;
+                    border-color: #aaa;
+                }
+                .nav-link:hover {
+                    background-color: #eee;
+                    color: #333;
+                }
+                thead th {
+                    color: #000;
                 }
             </style>
         
