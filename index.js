@@ -109,7 +109,7 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
                             leagueName = 'Premier';
                             break;
                         case '989238596353794048':
-                            leagueName = 'Master';
+                            leagueName = 'Masters';
                             break;
                         case '989240797381951488':
                             leagueName = 'National';
