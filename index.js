@@ -72,7 +72,7 @@ async function getMatchupHistory(leagueId, week, usersCache) {
     }
 }
 
-// Function to generate HTML content with Bootstrap v5 styling for all weeks
+// Function to generate HTML content with Bootstrap v5 styling for all leagues and years
 function generateHTMLForAllLeagues(matchupsByLeague) {
     const { document } = (new JSDOM()).window;
     const div = document.createElement('div');
@@ -100,58 +100,55 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
             </style>
         </head>
         <body>
-            <h1 class="mb-4">Matchup History</h1>
+            <h1 class="mb-4">FFU Matchup History</h1>
             <ul class="nav nav-tabs" id="leagueTabs" role="tablist">
-                ${matchupsByLeague.map(({ leagueId, seasonYear }, index) => {
-                    let leagueName = '';
-                    switch (leagueId) {
-                        case '989237166217723904':
-                            leagueName = 'Premier';
-                            break;
-                        case '989238596353794048':
-                            leagueName = 'Masters';
-                            break;
-                        case '989240797381951488':
-                            leagueName = 'National';
-                            break;
-                        default:
-                            leagueName = leagueId;
-                    }
-                    return `
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link ${index === 0 ? 'active' : ''}" id="tab-${leagueId}" data-bs-toggle="tab" data-bs-target="#content-${leagueId}" type="button" role="tab" aria-controls="content-${leagueId}" aria-selected="${index === 0 ? 'true' : 'false'}">${leagueName} - ${seasonYear}</button>
-                        </li>
-                    `;
-                }).join('')}
+                ${matchupsByLeague.map(({ name, leagueYears }, index) => `
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link ${index === 0 ? 'active' : ''}" id="tab-${index}" data-bs-toggle="tab" data-bs-target="#content-${index}" type="button" role="tab" aria-controls="content-${index}" aria-selected="${index === 0 ? 'true' : 'false'}">${name}</button>
+                    </li>
+                `).join('')}
             </ul>
             <div class="tab-content" id="leagueTabsContent">
-                ${matchupsByLeague.map(({ leagueId, seasonYear, matchupsByWeek }, index) => `
-                    <div class="tab-pane fade ${index === 0 ? 'show active' : ''}" id="content-${leagueId}" role="tabpanel" aria-labelledby="tab-${leagueId}">
-                        ${matchupsByWeek.map(({ week, matchups }) => `
-                            <div class="table-container">
-                                <h2 class="mb-3">Week ${week}</h2>
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Winner</th>
-                                            <th scope="col">Winner Score</th>
-                                            <th scope="col">Loser Score</th>
-                                            <th scope="col">Loser</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        ${matchups.map((matchup, index) => `
-                                            <tr>
-                                                <td class="${matchup.winnerScore > matchup.loserScore ? 'winner' : 'loser'}">${matchup.winner}</td>
-                                                <td>${matchup.winnerScore}</td>
-                                                <td>${matchup.loserScore}</td>
-                                                <td class="${matchup.winnerScore > matchup.loserScore ? 'loser' : 'winner'}">${matchup.loser}</td>
-                                            </tr>
-                                        `).join('')}
-                                    </tbody>
-                                </table>
-                            </div>
-                        `).join('')}
+                ${matchupsByLeague.map(({ leagueYears }, index) => `
+                    <div class="tab-pane fade ${index === 0 ? 'show active' : ''}" id="content-${index}" role="tabpanel" aria-labelledby="tab-${index}">
+                        <ul class="nav nav-tabs" id="yearTabs-${index}" role="tablist">
+                            ${leagueYears.map(({ year }, subIndex) => `
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link ${subIndex === 0 ? 'active' : ''}" id="subtab-${index}-${subIndex}" data-bs-toggle="tab" data-bs-target="#subcontent-${index}-${subIndex}" type="button" role="tab" aria-controls="subcontent-${index}-${subIndex}" aria-selected="${subIndex === 0 ? 'true' : 'false'}">${year}</button>
+                                </li>
+                            `).join('')}
+                        </ul>
+                        <div class="tab-content" id="yearTabsContent-${index}">
+                            ${leagueYears.map(({ matchupsByWeek }, subIndex) => `
+                                <div class="tab-pane fade ${subIndex === 0 ? 'show active' : ''}" id="subcontent-${index}-${subIndex}" role="tabpanel" aria-labelledby="subtab-${index}-${subIndex}">
+                                    ${matchupsByWeek.map(({ week, matchups }) => `
+                                        <div class="table-container">
+                                            <h2 class="mb-3">Week ${week}</h2>
+                                            <table class="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th scope="col">Winner</th>
+                                                        <th scope="col">Winner Score</th>
+                                                        <th scope="col">Loser Score</th>
+                                                        <th scope="col">Loser</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    ${matchups.map((matchup, index) => `
+                                                        <tr>
+                                                            <td class="${matchup.winnerScore > matchup.loserScore ? 'winner' : 'loser'}">${matchup.winner}</td>
+                                                            <td>${matchup.winnerScore}</td>
+                                                            <td>${matchup.loserScore}</td>
+                                                            <td class="${matchup.winnerScore > matchup.loserScore ? 'loser' : 'winner'}">${matchup.loser}</td>
+                                                        </tr>
+                                                    `).join('')}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `).join('')}
+                        </div>
                     </div>
                 `).join('')}
             </div>
@@ -164,21 +161,34 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
 
 
 
-// Function to fetch matchup history for all leagues and generate HTML for each league
 async function fetchAndGenerateHTMLForAllLeagues(leagueIds) {
     const matchupsByLeague = [];
 
-    for (const leagueId of leagueIds) {
+    async function fetchMatchupHistory(leagueId, depth) {
         const leagueInfoResponse = await axios.get(`https://api.sleeper.app/v1/league/${leagueId}`);
-        const seasonYear = leagueInfoResponse.data.season;
+        const { name } = leagueInfoResponse.data;
 
-        const matchupsByWeek = [];
-        for (let week = 1; week <= 17; week++) {
-            const matchups = await getMatchupHistory(leagueId, week, {});
-            matchupsByWeek.push({ week, matchups });
+        const leagueYears = [];
+        let currentLeagueId = leagueId;
+        while (currentLeagueId) {
+            const seasonResponse = await axios.get(`https://api.sleeper.app/v1/league/${currentLeagueId}`);
+            const { season } = seasonResponse.data;
+            const year = parseInt(season);
+            const matchupsByWeek = [];
+            for (let week = 1; week <= 17; week++) {
+                const matchups = await getMatchupHistory(currentLeagueId, week, {});
+                matchupsByWeek.push({ week, matchups });
+            }
+            leagueYears.push({ year, matchupsByWeek });
+            currentLeagueId = seasonResponse.data.previous_league_id;
         }
 
-        matchupsByLeague.push({ leagueId, seasonYear, matchupsByWeek });
+        matchupsByLeague.push({ name, leagueYears, depth });
+
+    }
+
+    for (let i = 0; i < leagueIds.length; i++) {
+        await fetchMatchupHistory(leagueIds[i], 0);
     }
 
     const html = generateHTMLForAllLeagues(matchupsByLeague);
