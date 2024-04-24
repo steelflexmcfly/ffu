@@ -72,6 +72,36 @@ async function getMatchupHistory(leagueId, week, usersCache) {
     }
 }
 
+function calculateRegularSeasonSummary(matchupsByWeek) {
+    const userSummary = {};
+    const matchups = matchupsByWeek.filter(matchupSet => +matchupSet.week <= 14).map(matchupSet => matchupSet.matchups);
+    matchups.forEach(matchup => {
+        matchup.forEach(({ winner, loser, winnerScore, loserScore }) => {
+            // Increment wins and losses for winner and loser
+            userSummary[winner] = userSummary[winner] || { wins: 0, losses: 0, pointsFor: 0, pointsAgainst: 0 };
+            userSummary[loser] = userSummary[loser] || { wins: 0, losses: 0, pointsFor: 0, pointsAgainst: 0 };
+            userSummary[winner].wins++;
+            userSummary[loser].losses++;
+    
+            // Add points for and against for winner and loser
+            userSummary[winner].pointsFor += winnerScore;
+            userSummary[winner].pointsAgainst += loserScore;
+            userSummary[loser].pointsFor += loserScore;
+            userSummary[loser].pointsAgainst += winnerScore;
+        });
+    });
+
+    // Calculate average points for each user
+    Object.values(userSummary).forEach(summary => {
+        summary.averagePoints = summary.pointsFor / (summary.wins + summary.losses);
+    });
+
+    // Convert userSummary object to an array of user summaries
+    const userSummaries = Object.entries(userSummary).map(([user, summary]) => ({ user, ...summary }));
+    return userSummaries;
+}
+
+
 // Function to generate HTML content with Bootstrap v5 styling for all leagues and years
 function generateHTMLForAllLeagues(matchupsByLeague) {
     const { document } = (new JSDOM()).window;
@@ -119,8 +149,37 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
                             `).join('')}
                         </ul>
                         <div class="tab-content" id="yearTabsContent-${index}">
-                            ${leagueYears.map(({ matchupsByWeek }, subIndex) => `
+                            ${leagueYears.map(({ year, matchupsByWeek }, subIndex) => `
                                 <div class="tab-pane fade ${subIndex === 0 ? 'show active' : ''}" id="subcontent-${index}-${subIndex}" role="tabpanel" aria-labelledby="subtab-${index}-${subIndex}">
+                                    <div class="table-container">
+                                        <h2 class="mb-3">Regular Season Summary</h2>
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">Win</th>
+                                                    <th scope="col">Loss</th>
+                                                    <th scope="col">Points For</th>
+                                                    <th scope="col">Points Against</th>
+                                                    <th scope="col">Average Points</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                ${calculateRegularSeasonSummary(matchupsByWeek.flat())
+                                                    .sort((a, b) => b.averagePoints - a.averagePoints)
+                                                    .map(({ user, wins, losses, pointsFor, pointsAgainst, averagePoints }) => `
+                                                    <tr>
+                                                        <td>${user}</td>
+                                                        <td>${wins}</td>
+                                                        <td>${losses}</td>
+                                                        <td>${pointsFor.toFixed(2)}</td>
+                                                        <td>${pointsAgainst.toFixed(2)}</td>
+                                                        <td>${averagePoints.toFixed(2)}</td>
+                                                    </tr>
+                                                `).join('')}
+                                            </tbody>
+                                        </table>
+                                    </div>
                                     ${matchupsByWeek.map(({ week, matchups }) => `
                                         <div class="table-container">
                                             <h2 class="mb-3">Week ${week}</h2>
@@ -158,8 +217,6 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
     `;
     return div.innerHTML;
 }
-
-
 
 async function fetchAndGenerateHTMLForAllLeagues(leagueIds) {
     const matchupsByLeague = [];
