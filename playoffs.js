@@ -16,6 +16,22 @@ async function getRosterIdToOwnerIdMap(leagueId) {
     }
 }
 
+// Function to fetch roster ID to display name map
+async function getRosterIdToDisplayNameMap(leagueId) {
+    try {
+        const response = await axios.get(`https://api.sleeper.app/v1/league/${leagueId}/rosters`);
+        const rosters = response.data;
+        const rosterIdToDisplayNameMap = {};
+        rosters.forEach(roster => {
+            rosterIdToDisplayNameMap[roster.roster_id] = roster.metadata.team_name;
+        });
+        return rosterIdToDisplayNameMap;
+    } catch (error) {
+        console.error('Error fetching roster data:', error);
+        return null;
+    }
+}
+
 // Function to fetch user data and build mapping between owner IDs and usernames
 async function buildOwnerToUsernameMap(rosterIdToOwnerIdMap) {
     try {
@@ -101,35 +117,81 @@ function determinePlayoffPlacements(playoffBracket) {
     return placements;
 }
 
-// Main function
-async function main() {
-    const leagueId = '989237166217723904'; // Specified league ID
-    // Fetch roster ID to owner ID map
-    const rosterIdToOwnerIdMap = await getRosterIdToOwnerIdMap(leagueId);
-    if (!rosterIdToOwnerIdMap) {
-        console.error('Failed to fetch roster data. Exiting.');
-        return;
-    }
-    console.log('Roster ID to owner ID map:', rosterIdToOwnerIdMap);
-    // Build mapping between owner IDs and usernames
-    const ownerToUsernameMap = await buildOwnerToUsernameMap(rosterIdToOwnerIdMap);
-    if (!ownerToUsernameMap) {
-        console.error('Failed to build owner to username map. Exiting.');
-        return;
-    }
-    console.log('Owner ID to username map:', ownerToUsernameMap);
-    // Fetch playoff bracket data
-    const playoffBracket = await getPlayoffBracket(leagueId, rosterIdToOwnerIdMap, ownerToUsernameMap);
-    if (!playoffBracket) {
-        console.error('Failed to fetch playoff bracket data. Exiting.');
-        return;
+// Main function to fetch playoff placements for multiple leagues
+async function main(leagueIds) {
+    const allPlacements = {}; // Object to store playoff placements for each league
+
+    const pastLeagueIds = await getPastLeagueIds(leagueIds);
+    const allLeagueIds = [...leagueIds, ...pastLeagueIds];
+
+    // Iterate through each league ID
+    for (const leagueId of allLeagueIds) {
+        // Fetch roster ID to owner ID map
+        const rosterIdToOwnerIdMap = await getRosterIdToOwnerIdMap(leagueId);
+        if (!rosterIdToOwnerIdMap) {
+            console.error(`Failed to fetch roster data for league ID ${leagueId}. Skipping.`);
+            continue;
+        }
+        // console.log(`Roster ID to owner ID map for league ${leagueId}:`, rosterIdToOwnerIdMap);
+
+        // Build mapping between owner IDs and usernames
+        const ownerToUsernameMap = await buildOwnerToUsernameMap(rosterIdToOwnerIdMap);
+        if (!ownerToUsernameMap) {
+            console.error(`Failed to build owner to username map for league ${leagueId}. Skipping.`);
+            continue;
+        }
+        // console.log(`Owner ID to username map for league ${leagueId}:`, ownerToUsernameMap);
+
+        // Fetch playoff bracket data
+        const playoffBracket = await getPlayoffBracket(leagueId, rosterIdToOwnerIdMap, ownerToUsernameMap);
+        if (!playoffBracket) {
+            console.error(`Failed to fetch playoff bracket data for league ${leagueId}. Skipping.`);
+            continue;
+        }
+
+        // Determine playoff placements
+        const placements = determinePlayoffPlacements(playoffBracket, ownerToUsernameMap);
+        // console.log(`Playoff Placements for league ${leagueId}:`, placements);
+
+        // Add playoff placements to the object
+        allPlacements[leagueId] = placements;
     }
 
-    // Determine playoff placements
-    const placements = determinePlayoffPlacements(playoffBracket, ownerToUsernameMap);
-    console.log('Playoff Placements:', placements);
-    // console.log('Playoff bracket:', playoffBracket);
+    // Return the object containing playoff placements for each league
+    return allPlacements;
 }
 
-// Run the main function
-main();
+async function getPastLeagueIds(leagueIds) {
+    const pastLeagueIds = new Set();
+
+    async function fetchPreviousLeagueIds(leagueId) {
+        try {
+            const response = await axios.get(`https://api.sleeper.app/v1/league/${leagueId}`);
+            const previousLeagueId = response.data.previous_league_id;
+            if (previousLeagueId) {
+                pastLeagueIds.add(previousLeagueId);
+                await fetchPreviousLeagueIds(previousLeagueId);
+            }
+        } catch (error) {
+            console.error(`Error fetching previous league ID for league ${leagueId}:`, error);
+        }
+    }
+
+    await Promise.all(leagueIds.map(async leagueId => {
+        await fetchPreviousLeagueIds(leagueId);
+    }));
+
+    return Array.from(pastLeagueIds);
+}
+
+
+// Run the main function with an array of league IDs
+const leagueIds = ['989237166217723904', '989238596353794048', '989240797381951488']; // Example league IDs
+main(leagueIds)
+    .then(placements => {
+        console.log('All Playoff Placements:', placements);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+
