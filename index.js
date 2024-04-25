@@ -73,6 +73,7 @@ function generateHeader() {
             <title>FFU Matchup History</title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
             <style>
                 body {
                     padding: 20px;
@@ -226,7 +227,7 @@ function generateRegularSeasonSummaryTable(matchupsByWeek, year) {
         <div class="table-container">
             <h2 class="mb-3">Regular Season Summary - ${year}</h2>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table sortable-table">
                     <thead>
                         <tr>
                             <th scope="col">User</th>
@@ -294,7 +295,7 @@ function generateAllTimeRegularSeasonSummaryTable(matchupsByLeague) {
         <div class="table-container">
             <h2 class="mb-3">All Time Regular Season Summary</h2>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table sortable-table">
                     <thead>
                         <tr>
                             <th scope="col">User</th>
@@ -328,7 +329,19 @@ function generateAllTimeRegularSeasonSummaryTable(matchupsByLeague) {
 // Function to generate the footer section of HTML
 function generateFooter() {
     return `
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.sortable-table').DataTable({
+                    "lengthChange": false,
+                    "searching": false,
+                    "paging": false
+                });
+            });
+        </script>
     `;
 }
 
