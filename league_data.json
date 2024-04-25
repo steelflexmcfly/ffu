@@ -86,6 +86,597 @@
                                 "loserScore": 85.45
                             }
                         ]
+                    },
+                    {
+                        "week": 3,
+                        "matchups": [
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "Hershy4",
+                                "winnerScore": 132.55,
+                                "loserScore": 84.7
+                            },
+                            {
+                                "winner": "JoshC94",
+                                "loser": "TCoolDaGoat",
+                                "winnerScore": 109.75,
+                                "loserScore": 106.85
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "cjcolip",
+                                "winnerScore": 145.45,
+                                "loserScore": 108.05
+                            },
+                            {
+                                "winner": "Yensen",
+                                "loser": "ExtremeSolution",
+                                "winnerScore": 126.5,
+                                "loserScore": 117.4
+                            },
+                            {
+                                "winner": "ItsAllOgre",
+                                "loser": "CamDelphia",
+                                "winnerScore": 128.75,
+                                "loserScore": 122.45
+                            },
+                            {
+                                "winner": "BaskinDobbins32",
+                                "loser": "DavrilOfKurth",
+                                "winnerScore": 102.55,
+                                "loserScore": 83.1
+                            }
+                        ]
+                    },
+                    {
+                        "week": 4,
+                        "matchups": [
+                            {
+                                "winner": "ItsAllOgre",
+                                "loser": "cjcolip",
+                                "winnerScore": 119.9,
+                                "loserScore": 70.4
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "TCoolDaGoat",
+                                "winnerScore": 100.95,
+                                "loserScore": 96
+                            },
+                            {
+                                "winner": "Hershy4",
+                                "loser": "DavrilOfKurth",
+                                "winnerScore": 102.3,
+                                "loserScore": 97.4
+                            },
+                            {
+                                "winner": "ExtremeSolution",
+                                "loser": "BaskinDobbins32",
+                                "winnerScore": 126.25,
+                                "loserScore": 100.55
+                            },
+                            {
+                                "winner": "Yensen",
+                                "loser": "Swaggyp017",
+                                "winnerScore": 148,
+                                "loserScore": 120.15
+                            },
+                            {
+                                "winner": "JoshC94",
+                                "loser": "CamDelphia",
+                                "winnerScore": 143.55,
+                                "loserScore": 118.65
+                            }
+                        ]
+                    },
+                    {
+                        "week": 5,
+                        "matchups": [
+                            {
+                                "winner": "Yensen",
+                                "loser": "Hershy4",
+                                "winnerScore": 91.5,
+                                "loserScore": 78.2
+                            },
+                            {
+                                "winner": "BaskinDobbins32",
+                                "loser": "cjcolip",
+                                "winnerScore": 112.1,
+                                "loserScore": 104.5
+                            },
+                            {
+                                "winner": "TCoolDaGoat",
+                                "loser": "ItsAllOgre",
+                                "winnerScore": 119.95,
+                                "loserScore": 105.65
+                            },
+                            {
+                                "winner": "DavrilOfKurth",
+                                "loser": "JoshC94",
+                                "winnerScore": 134.45,
+                                "loserScore": 88.35
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "Swaggyp017",
+                                "winnerScore": 154.8,
+                                "loserScore": 137.55
+                            },
+                            {
+                                "winner": "CamDelphia",
+                                "loser": "ExtremeSolution",
+                                "winnerScore": 147.95,
+                                "loserScore": 116.55
+                            }
+                        ]
+                    },
+                    {
+                        "week": 6,
+                        "matchups": [
+                            {
+                                "winner": "ExtremeSolution",
+                                "loser": "Hershy4",
+                                "winnerScore": 117.85,
+                                "loserScore": 116.75
+                            },
+                            {
+                                "winner": "TCoolDaGoat",
+                                "loser": "Yensen",
+                                "winnerScore": 106.65,
+                                "loserScore": 100.35
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "ItsAllOgre",
+                                "winnerScore": 113.7,
+                                "loserScore": 109.25
+                            },
+                            {
+                                "winner": "JoshC94",
+                                "loser": "BaskinDobbins32",
+                                "winnerScore": 88.65,
+                                "loserScore": 65.6
+                            },
+                            {
+                                "winner": "cjcolip",
+                                "loser": "DavrilOfKurth",
+                                "winnerScore": 131.8,
+                                "loserScore": 103.05
+                            },
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "CamDelphia",
+                                "winnerScore": 114.7,
+                                "loserScore": 88.9
+                            }
+                        ]
+                    },
+                    {
+                        "week": 7,
+                        "matchups": [
+                            {
+                                "winner": "Hershy4",
+                                "loser": "Jamauro",
+                                "winnerScore": 131.55,
+                                "loserScore": 125.1
+                            },
+                            {
+                                "winner": "ExtremeSolution",
+                                "loser": "TCoolDaGoat",
+                                "winnerScore": 98.35,
+                                "loserScore": 84.9
+                            },
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "BaskinDobbins32",
+                                "winnerScore": 141,
+                                "loserScore": 83.6
+                            },
+                            {
+                                "winner": "JoshC94",
+                                "loser": "ItsAllOgre",
+                                "winnerScore": 112.9,
+                                "loserScore": 112.85
+                            },
+                            {
+                                "winner": "CamDelphia",
+                                "loser": "cjcolip",
+                                "winnerScore": 108.35,
+                                "loserScore": 83.8
+                            },
+                            {
+                                "winner": "DavrilOfKurth",
+                                "loser": "Yensen",
+                                "winnerScore": 118.75,
+                                "loserScore": 94.75
+                            }
+                        ]
+                    },
+                    {
+                        "week": 8,
+                        "matchups": [
+                            {
+                                "winner": "DavrilOfKurth",
+                                "loser": "Swaggyp017",
+                                "winnerScore": 105.7,
+                                "loserScore": 91.9
+                            },
+                            {
+                                "winner": "TCoolDaGoat",
+                                "loser": "cjcolip",
+                                "winnerScore": 147.85,
+                                "loserScore": 108.1
+                            },
+                            {
+                                "winner": "CamDelphia",
+                                "loser": "Yensen",
+                                "winnerScore": 123.15,
+                                "loserScore": 113.25
+                            },
+                            {
+                                "winner": "ExtremeSolution",
+                                "loser": "ItsAllOgre",
+                                "winnerScore": 126.4,
+                                "loserScore": 113.7
+                            },
+                            {
+                                "winner": "BaskinDobbins32",
+                                "loser": "Hershy4",
+                                "winnerScore": 99.6,
+                                "loserScore": 98.05
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "JoshC94",
+                                "winnerScore": 184.1,
+                                "loserScore": 139.5
+                            }
+                        ]
+                    },
+                    {
+                        "week": 9,
+                        "matchups": [
+                            {
+                                "winner": "cjcolip",
+                                "loser": "Hershy4",
+                                "winnerScore": 96.05,
+                                "loserScore": 87.95
+                            },
+                            {
+                                "winner": "TCoolDaGoat",
+                                "loser": "CamDelphia",
+                                "winnerScore": 125.5,
+                                "loserScore": 97.65
+                            },
+                            {
+                                "winner": "JoshC94",
+                                "loser": "ExtremeSolution",
+                                "winnerScore": 122.8,
+                                "loserScore": 111.65
+                            },
+                            {
+                                "winner": "BaskinDobbins32",
+                                "loser": "Yensen",
+                                "winnerScore": 99.2,
+                                "loserScore": 80.85
+                            },
+                            {
+                                "winner": "ItsAllOgre",
+                                "loser": "Swaggyp017",
+                                "winnerScore": 139.45,
+                                "loserScore": 75.65
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "DavrilOfKurth",
+                                "winnerScore": 144.2,
+                                "loserScore": 89.2
+                            }
+                        ]
+                    },
+                    {
+                        "week": 10,
+                        "matchups": [
+                            {
+                                "winner": "ItsAllOgre",
+                                "loser": "Hershy4",
+                                "winnerScore": 118.05,
+                                "loserScore": 83.25
+                            },
+                            {
+                                "winner": "TCoolDaGoat",
+                                "loser": "BaskinDobbins32",
+                                "winnerScore": 111.45,
+                                "loserScore": 75.6
+                            },
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "cjcolip",
+                                "winnerScore": 129.85,
+                                "loserScore": 84.4
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "CamDelphia",
+                                "winnerScore": 169.1,
+                                "loserScore": 101.2
+                            },
+                            {
+                                "winner": "Yensen",
+                                "loser": "JoshC94",
+                                "winnerScore": 136.5,
+                                "loserScore": 114.05
+                            },
+                            {
+                                "winner": "ExtremeSolution",
+                                "loser": "DavrilOfKurth",
+                                "winnerScore": 112.15,
+                                "loserScore": 78.55
+                            }
+                        ]
+                    },
+                    {
+                        "week": 11,
+                        "matchups": [
+                            {
+                                "winner": "CamDelphia",
+                                "loser": "Hershy4",
+                                "winnerScore": 71.5,
+                                "loserScore": 69.5
+                            },
+                            {
+                                "winner": "ItsAllOgre",
+                                "loser": "Yensen",
+                                "winnerScore": 96.4,
+                                "loserScore": 82.5
+                            },
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "ExtremeSolution",
+                                "winnerScore": 117.75,
+                                "loserScore": 104.5
+                            },
+                            {
+                                "winner": "cjcolip",
+                                "loser": "JoshC94",
+                                "winnerScore": 126.45,
+                                "loserScore": 125.6
+                            },
+                            {
+                                "winner": "DavrilOfKurth",
+                                "loser": "TCoolDaGoat",
+                                "winnerScore": 127.05,
+                                "loserScore": 74.15
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "BaskinDobbins32",
+                                "winnerScore": 131.75,
+                                "loserScore": 127.55
+                            }
+                        ]
+                    },
+                    {
+                        "week": 12,
+                        "matchups": [
+                            {
+                                "winner": "JoshC94",
+                                "loser": "TCoolDaGoat",
+                                "winnerScore": 147.1,
+                                "loserScore": 98.65
+                            },
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "Hershy4",
+                                "winnerScore": 147.4,
+                                "loserScore": 117.65
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "cjcolip",
+                                "winnerScore": 144.45,
+                                "loserScore": 82.45
+                            },
+                            {
+                                "winner": "ExtremeSolution",
+                                "loser": "Yensen",
+                                "winnerScore": 117.25,
+                                "loserScore": 115.8
+                            },
+                            {
+                                "winner": "DavrilOfKurth",
+                                "loser": "BaskinDobbins32",
+                                "winnerScore": 158.25,
+                                "loserScore": 102.45
+                            },
+                            {
+                                "winner": "ItsAllOgre",
+                                "loser": "CamDelphia",
+                                "winnerScore": 132.6,
+                                "loserScore": 83.9
+                            }
+                        ]
+                    },
+                    {
+                        "week": 13,
+                        "matchups": [
+                            {
+                                "winner": "JoshC94",
+                                "loser": "Hershy4",
+                                "winnerScore": 130.1,
+                                "loserScore": 113.55
+                            },
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "TCoolDaGoat",
+                                "winnerScore": 110.5,
+                                "loserScore": 104.95
+                            },
+                            {
+                                "winner": "ExtremeSolution",
+                                "loser": "cjcolip",
+                                "winnerScore": 133.55,
+                                "loserScore": 111.8
+                            },
+                            {
+                                "winner": "Yensen",
+                                "loser": "Jamauro",
+                                "winnerScore": 141.25,
+                                "loserScore": 136.85
+                            },
+                            {
+                                "winner": "ItsAllOgre",
+                                "loser": "DavrilOfKurth",
+                                "winnerScore": 138.6,
+                                "loserScore": 80.9
+                            },
+                            {
+                                "winner": "CamDelphia",
+                                "loser": "BaskinDobbins32",
+                                "winnerScore": 95.2,
+                                "loserScore": 88
+                            }
+                        ]
+                    },
+                    {
+                        "week": 14,
+                        "matchups": [
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "JoshC94",
+                                "winnerScore": 93.55,
+                                "loserScore": 78.35
+                            },
+                            {
+                                "winner": "Hershy4",
+                                "loser": "TCoolDaGoat",
+                                "winnerScore": 135.4,
+                                "loserScore": 85.1
+                            },
+                            {
+                                "winner": "cjcolip",
+                                "loser": "Yensen",
+                                "winnerScore": 109.2,
+                                "loserScore": 107.6
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "ExtremeSolution",
+                                "winnerScore": 116.95,
+                                "loserScore": 92.5
+                            },
+                            {
+                                "winner": "DavrilOfKurth",
+                                "loser": "CamDelphia",
+                                "winnerScore": 123.65,
+                                "loserScore": 116.35
+                            },
+                            {
+                                "winner": "BaskinDobbins32",
+                                "loser": "ItsAllOgre",
+                                "winnerScore": 108.95,
+                                "loserScore": 107.45
+                            }
+                        ]
+                    },
+                    {
+                        "week": 15,
+                        "matchups": [
+                            {
+                                "winner": "JoshC94",
+                                "loser": "ItsAllOgre",
+                                "winnerScore": 184.95,
+                                "loserScore": 110.5
+                            },
+                            {
+                                "winner": "CamDelphia",
+                                "loser": "ExtremeSolution",
+                                "winnerScore": 96.2,
+                                "loserScore": 92.2
+                            },
+                            {
+                                "winner": "TCoolDaGoat",
+                                "loser": "BaskinDobbins32",
+                                "winnerScore": 118.3,
+                                "loserScore": 85
+                            },
+                            {
+                                "winner": "DavrilOfKurth",
+                                "loser": "Yensen",
+                                "winnerScore": 86.7,
+                                "loserScore": 70.3
+                            }
+                        ]
+                    },
+                    {
+                        "week": 16,
+                        "matchups": [
+                            {
+                                "winner": "CamDelphia",
+                                "loser": "Jamauro",
+                                "winnerScore": 121.45,
+                                "loserScore": 116.85
+                            },
+                            {
+                                "winner": "Swaggyp017",
+                                "loser": "JoshC94",
+                                "winnerScore": 109.95,
+                                "loserScore": 99.55
+                            },
+                            {
+                                "winner": "ExtremeSolution",
+                                "loser": "ItsAllOgre",
+                                "winnerScore": 130.2,
+                                "loserScore": 85.85
+                            },
+                            {
+                                "winner": "BaskinDobbins32",
+                                "loser": "Hershy4",
+                                "winnerScore": 109.4,
+                                "loserScore": 98.8
+                            },
+                            {
+                                "winner": "Yensen",
+                                "loser": "cjcolip",
+                                "winnerScore": 103.2,
+                                "loserScore": 99.45
+                            },
+                            {
+                                "winner": "TCoolDaGoat",
+                                "loser": "DavrilOfKurth",
+                                "winnerScore": 130.85,
+                                "loserScore": 121.35
+                            }
+                        ]
+                    },
+                    {
+                        "week": 17,
+                        "matchups": [
+                            {
+                                "winner": "CamDelphia",
+                                "loser": "Swaggyp017",
+                                "winnerScore": 126.55,
+                                "loserScore": 105.45
+                            },
+                            {
+                                "winner": "Jamauro",
+                                "loser": "JoshC94",
+                                "winnerScore": 121.15,
+                                "loserScore": 101.55
+                            },
+                            {
+                                "winner": "Hershy4",
+                                "loser": "cjcolip",
+                                "winnerScore": 106.25,
+                                "loserScore": 80.55
+                            },
+                            {
+                                "winner": "BaskinDobbins32",
+                                "loser": "Yensen",
+                                "winnerScore": 139.2,
+                                "loserScore": 122.55
+                            }
+                        ]
                     }
                 ],
                 "leagueId": "989237166217723904",
