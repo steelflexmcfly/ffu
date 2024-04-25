@@ -1,5 +1,6 @@
 const axios = require('axios');
 const fs = require('fs');
+const playoffData = require('./playoff_data.json');
 
 // Function to fetch user details for unique user IDs
 async function fetchUserDetails(userId) {
@@ -89,13 +90,16 @@ async function fetchDataForAllLeagues(leagueIds) {
                 const matchups = await getMatchupHistory(currentLeagueId, week, {});
                 matchupsByWeek.push({ week, matchups });
             }
-            leagueYears.push({ year, matchupsByWeek });
+            // Find the playoff data corresponding to the current leagueId
+            const playoffInfo = playoffData[currentLeagueId];
+            leagueYears.push({ year, matchupsByWeek, leagueId: currentLeagueId, playoffInfo });
             currentLeagueId = seasonResponse.data.previous_league_id;
         }
     
         matchupsByLeague.push({ name, leagueYears, depth });
     
     }
+    
     
     for (let i = 0; i < leagueIds.length; i++) {
         await fetchMatchupHistory(leagueIds[i], 0);

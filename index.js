@@ -74,90 +74,90 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
             <style>
-                body {
-                    padding: 20px;
-                    background-color: #f8f9fa;
-                    color: #333;
-                    font-size: 16px;
-                }
-                .container {
-                    max-width: 1200px; /* Set max width for the overall page */
-                    margin: auto; /* Center the content horizontally */
-                }
-                .table-container {
-                    background-color: #fff;
-                    padding: 20px;
-                    border-radius: 10px;
-                    margin-bottom: 20px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                }
-                .nav-tabs {
-                    border: none;
-                    border-radius: 10px;
-                    margin-bottom: 20px;
-                    overflow-x: auto;
-                    display: flex;
-                    flex-wrap: nowrap;
-                }
-                .nav-tabs .nav-link {
-                    color: #333;
-                    border: none;
-                    background-color: transparent;
-                    padding: 10px 15px;
-                    margin-right: 5px;
-                    border-radius: 10px;
-                    transition: background-color 0.3s;
-                }
-                .nav-tabs .nav-link.active {
-                    background-color: #dc3545;
-                    color: #fff;
-                    border: none;
-                }
-                .nav-tabs .nav-link:not(.active):hover {
-                    background-color: #eee;
-                    color: #333;
-                }
-                .tab-content {
-                    padding: 10px;
-                }
-                .table {
-                    background-color: #fff;
-                    font-size: 14px;
-                }
-                .winner {
-                    color: #218838;
-                    font-weight: normal;
-                }
-                .loser {
-                    color: #c82333;
-                    font-weight: normal;
-                }
-                h1, h2, h3, h4, h5, h6 {
-                    color: #dc3545;
-                    margin-bottom: 15px;
-                    text-align: center;
-                }
-                th {
-                    font-weight: bold;
-                    color: #000;
-                }
-                .nav-link.active {
-                    background-color: #dc3545;
-                    color: #fff;
-                    border-color: #dc3545;
-                }
-                .nav-link {
-                    background-color: #fff;
-                    color: #dc3545;
-                    border-color: #aaa;
-                }
-                .nav-link:hover {
-                    background-color: #eee;
-                    color: #333;
-                }
-                thead th {
-                    color: #000;
-                }
+            body {
+                padding: 20px;
+                background-color: #f8f9fa;
+                color: #333;
+                font-size: 16px;
+            }
+            .container {
+                max-width: 1200px; /* Set max width for the overall page */
+                margin: auto; /* Center the content horizontally */
+            }
+            .table-container {
+                background-color: #fff;
+                padding: 20px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+            .nav-tabs {
+                border: none;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                overflow-x: auto;
+                display: flex;
+                flex-wrap: nowrap;
+            }
+            .nav-tabs .nav-link {
+                color: #333;
+                border: none;
+                background-color: transparent;
+                padding: 10px 15px;
+                margin-right: 5px;
+                border-radius: 10px;
+                transition: background-color 0.3s;
+            }
+            .nav-tabs .nav-link.active {
+                background-color: #dc3545;
+                color: #fff;
+                border: none;
+            }
+            .nav-tabs .nav-link:not(.active):hover {
+                background-color: #eee;
+                color: #333;
+            }
+            .tab-content {
+                padding: 10px;
+            }
+            .table {
+                background-color: #fff;
+                font-size: 14px;
+            }
+            .winner {
+                color: #218838;
+                font-weight: normal;
+            }
+            .loser {
+                color: #c82333;
+                font-weight: normal;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                color: #dc3545;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            th {
+                font-weight: bold;
+                color: #000;
+            }
+            .nav-link.active {
+                background-color: #dc3545;
+                color: #fff;
+                border-color: #dc3545;
+            }
+            .nav-link {
+                background-color: #fff;
+                color: #dc3545;
+                border-color: #aaa;
+            }
+            .nav-link:hover {
+                background-color: #eee;
+                color: #333;
+            }
+            thead th {
+                color: #000;
+            }
             </style>
         </head>
         <body>
@@ -184,8 +184,30 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
                                 `).join('')}
                             </ul>
                             <div class="tab-content" id="yearTabsContent-${index}">
-                                ${leagueYears.map(({ year, matchupsByWeek }, subIndex) => `
+                                ${leagueYears.map(({ year, matchupsByWeek, playoffInfo }, subIndex) => `
                                     <div class="tab-pane fade ${subIndex === 0 ? 'show active' : ''}" id="subcontent-${index}-${subIndex}" role="tabpanel" aria-labelledby="subtab-${index}-${subIndex}">
+                                    <div class="table-container">
+                                            <h2 class="mb-3">Playoff Finishes - ${year}</h2>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th scope="col">Place</th>
+                                                            <th scope="col">User</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        ${Object.entries(playoffInfo)
+                                                            .map(([place, user]) => `
+                                                                <tr>
+                                                                    <td>${place}</td>
+                                                                    <td>${user}</td>
+                                                                </tr>
+                                                            `).join('')}
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                         <div class="table-container">
                                             <h2 class="mb-3">Regular Season Summary - ${year}</h2>
                                             <div class="table-responsive">
