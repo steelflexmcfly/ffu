@@ -32,6 +32,160 @@ function calculateRegularSeasonSummary(matchupsByWeek) {
     return userSummaries;
 }
 
+// Function to calculate the Top 10 highest single game scores
+function calculateTop10HighestSingleGameScores(matchupsByLeague) {
+    const topScores = [];
+    matchupsByLeague.forEach(({ leagueYears }) => {
+        leagueYears.forEach(({ year, matchupsByWeek }) => {
+            matchupsByWeek.forEach(({ week, matchups }) => {
+                matchups.forEach(({ winner, winnerScore }) => {
+                    const existing = topScores.find(score => score.user === winner);
+                    if (!existing) {
+                        topScores.push({ user: winner, score: winnerScore, year, week });
+                    } else if (winnerScore > existing.score) {
+                        existing.score = winnerScore;
+                        existing.year = year;
+                        existing.week = week;
+                    }
+                });
+            });
+        });
+    });
+    return topScores.sort((a, b) => b.score - a.score).slice(0, 10);
+}
+
+// Function to calculate the Top 10 lowest single game scores
+function calculateTop10LowestSingleGameScores(matchupsByLeague) {
+    const lowestScores = [];
+    matchupsByLeague.forEach(({ leagueYears }) => {
+        leagueYears.forEach(({ year, matchupsByWeek }) => {
+            matchupsByWeek.forEach(({ week, matchups }) => {
+                matchups.forEach(({ loser, loserScore }) => {
+                    const existing = lowestScores.find(score => score.user === loser);
+                    if (!existing) {
+                        lowestScores.push({ user: loser, score: loserScore, year, week });
+                    } else if (loserScore < existing.score) {
+                        existing.score = loserScore;
+                        existing.year = year;
+                        existing.week = week;
+                    }
+                });
+            });
+        });
+    });
+    return lowestScores.sort((a, b) => a.score - b.score).slice(0, 10);
+}
+
+// Function to calculate the Top 10 closest matchups
+function calculateTop10ClosestMatchups(matchupsByLeague) {
+    const closestMatchups = [];
+    matchupsByLeague.forEach(({ leagueYears }) => {
+        leagueYears.forEach(({ year, matchupsByWeek }) => {
+            matchupsByWeek.forEach(({ week, matchups }) => {
+                matchups.forEach(({ winner, loser, winnerScore, loserScore }) => {
+                    const difference = Math.abs(winnerScore - loserScore);
+                    closestMatchups.push({ winner, loser, difference: difference.toFixed(2), year, week });
+                });
+            });
+        });
+    });
+    return closestMatchups.sort((a, b) => a.difference - b.difference).slice(0, 10);
+}
+
+// Function to generate the table for Top 10 highest single game scores
+function generateTop10HighestSingleGameScoresTable(top3HighestScores) {
+    return `
+        <div class="table-container">
+            <h2 class="mb-3">Top 10 Highest Single Game Scores</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Score</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Week</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${top3HighestScores.map(({ user, score, year, week }) => `
+                            <tr>
+                                <td>${user}</td>
+                                <td>${score}</td>
+                                <td>${year}</td>
+                                <td>${week}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+// Function to generate the table for Top 10 lowest single game scores
+function generateTop10LowestSingleGameScoresTable(top3LowestScores) {
+    return `
+        <div class="table-container">
+            <h2 class="mb-3">Top 10 Lowest Single Game Scores</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Score</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Week</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${top3LowestScores.map(({ user, score, year, week }) => `
+                            <tr>
+                                <td>${user}</td>
+                                <td>${score}</td>
+                                <td>${year}</td>
+                                <td>${week}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
+
+// Function to generate the table for Top 10 closest matchups
+function generateTop10ClosestMatchupsTable(top3ClosestMatchups) {
+    return `
+        <div class="table-container">
+            <h2 class="mb-3">Top 10 Closest Matchups</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Winner</th>
+                            <th scope="col">Loser</th>
+                            <th scope="col">Difference</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Week</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${top3ClosestMatchups.map(({ winner, loser, difference, year, week }) => `
+                            <tr>
+                                <td>${winner}</td>
+                                <td>${loser}</td>
+                                <td>${difference}</td>
+                                <td>${year}</td>
+                                <td>${week}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    `;
+}
 // Function to calculate all-time regular season summary
 function calculateAllTimeRegularSeasonSummary(matchupsByLeague) {
     const userSummary = {};
@@ -75,114 +229,91 @@ function generateHeader() {
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
             <style>
-            body {
-                padding: 20px;
-                background-color: #f8f9fa;
-                color: #333;
-                font-size: 16px;
-            }
-            .nav-tabs {
-                border: none;
-                border-radius: 10px;
-                margin-bottom: 20px;
-                display: flex;
-                flex-wrap: nowrap;
-            }
-            .nav-tabs .nav-link {
-                color: #333;
-                border: none;
-                background-color: transparent;
-                padding: 10px 15px;
-                margin-right: 5px;
-                border-radius: 10px;
-                transition: background-color 0.3s;
-            }
-            .nav-tabs .nav-link.active {
-                background-color: #dc3545;
-                color: #fff;
-                border: none;
-            }
-            .nav-tabs .nav-link:not(.active):hover {
-                background-color: #eee;
-                color: #333;
-            }
-            .tab-content {
-                padding: 10px;
-            }
-            .table {
-                background-color: #fff;
-                font-size: 14px;
-                width: 100%;
-            }
-            .winner {
-                color: #218838;
-                font-weight: normal;
-            }
-            .loser {
-                color: #c82333;
-                font-weight: normal;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                color: #dc3545;
-                margin-bottom: 15px;
-                text-align: center;
-            }
-            th {
-                font-weight: bold;
-                color: #000;
-            }
-            .nav-link.active {
-                background-color: #dc3545;
-                color: #fff;
-                border-color: #dc3545;
-            }
-            .nav-link {
-                background-color: #fff;
-                color: #dc3545;
-                border-color: #aaa;
-            }
-            .nav-link:hover {
-                background-color: #eee;
-                color: #333;
-            }
-            thead th {
-                color: #000;
-            }
-            .playoff-table tbody tr:nth-child(1) {
-                background-color: rgba(255, 215, 0, 0.5); /* Gold with 50% opacity */
-            }
-            
-            .playoff-table tbody tr:nth-child(2) {
-                background-color: rgba(192, 192, 192, 0.5); /* Silver with 50% opacity */
-            }
-            
-            .playoff-table tbody tr:nth-child(3) {
-                background-color: rgba(205, 133, 63, 0.5); /* Bronze with 50% opacity */
-            }
-            
-            
-        
-            /* Mobile view adjustments */
-            @media (max-width: 767px) {
-                .nav-tabs {
-                    flex-wrap: wrap;
-                    justify-content: center;
+                body {
+                    padding: 20px;
+                    background-color: #f8f9fa;
+                    color: #333;
+                    font-size: 16px;
                 }
-                .nav-link {
-                    flex-grow: 1;
-                    text-align: center;
+                .container {
+                    max-width: 1200px;
+                    margin: auto;
                 }
                 .table-container {
-                    padding: 10px;
-                    border-radius: 0;
-                    margin-bottom: 10px;
-                    box-shadow: none;
-                }
-                .dropdown-menu {
+                    background-color: #fff;
+                    padding: 20px;
                     border-radius: 10px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 }
-            }
-        </style>
+                .nav-tabs {
+                    border: none;
+                    border-radius: 10px;
+                    margin-bottom: 20px;
+                    overflow-x: auto;
+                    display: flex;
+                    flex-wrap: nowrap;
+                }
+                .nav-tabs .nav-link {
+                    color: #333;
+                    border: none;
+                    background-color: transparent;
+                    padding: 10px 15px;
+                    margin-right: 5px;
+                    border-radius: 10px;
+                    transition: background-color 0.3s;
+                }
+                .nav-tabs .nav-link.active {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border: none;
+                }
+                .nav-tabs .nav-link:not(.active):hover {
+                    background-color: #eee;
+                    color: #333;
+                }
+                .tab-content {
+                    padding: 10px;
+                }
+                .table {
+                    background-color: #fff;
+                    font-size: 14px;
+                }
+                .winner {
+                    color: #218838;
+                    font-weight: normal;
+                }
+                .loser {
+                    color: #c82333;
+                    font-weight: normal;
+                }
+                h1, h2, h3, h4, h5, h6 {
+                    color: #dc3545;
+                    margin-bottom: 15px;
+                    text-align: center;
+                }
+                th {
+                    font-weight: bold;
+                    color: #000;
+                }
+                .nav-link.active {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border-color: #dc3545;
+                }
+                .nav-link {
+                    background-color: #fff;
+                    color: #dc3545;
+                    border-color: #aaa;
+                }
+                .nav-link:hover {
+                    background-color: #eee;
+                    color: #333;
+                }
+                thead th {
+                    color: #000;
+                }
+            </style>
         </head>
     `;
 }
@@ -198,6 +329,9 @@ function generateLeagueTabs(matchupsByLeague) {
             `).join('')}
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tab-all-time" data-bs-toggle="tab" data-bs-target="#content-all-time" type="button" role="tab" aria-controls="content-all-time" aria-selected="false">All Time</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-analysis" data-bs-toggle="tab" data-bs-target="#content-analysis" type="button" role="tab" aria-controls="content-analysis" aria-selected="false">Analysis</button>
             </li>
         </ul>
     `;
@@ -220,9 +354,9 @@ function generateYearTabs(leagueYears, leagueIndex) {
 function generatePlayoffFinishesTable(playoffInfo, year) {
     return `
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - ${year}</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -232,7 +366,7 @@ function generatePlayoffFinishesTable(playoffInfo, year) {
                     <tbody>
                         ${Object.entries(playoffInfo)
                             .map(([place, user]) => `
-                                <tr>
+                                <tr class="${place === '1st' ? 'gold' : place === '2nd' ? 'silver' : place === '3rd' ? 'bronze' : ''}">
                                     <td>${place}</td>
                                     <td>${user}</td>
                                 </tr>
@@ -248,7 +382,7 @@ function generatePlayoffFinishesTable(playoffInfo, year) {
 function generateRegularSeasonSummaryTable(matchupsByWeek, year) {
     return `
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - ${year}</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -280,7 +414,6 @@ function generateRegularSeasonSummaryTable(matchupsByWeek, year) {
         </div>
     `;
 }
-
 
 // Function to generate tables for weekly matchup summaries
 function generateWeeklyMatchupTables(matchupsByWeek) {
@@ -350,15 +483,44 @@ function generateAllTimeRegularSeasonSummaryTable(matchupsByLeague) {
     `;
 }
 
+// Function to generate the HTML for analysis tab
+function generateAnalysisTable(matchupsByLeague) {
+    const top3HighestScores = calculateTop10HighestSingleGameScores(matchupsByLeague);
+    const top3LowestScores = calculateTop10LowestSingleGameScores(matchupsByLeague);
+    const top3ClosestMatchups = calculateTop10ClosestMatchups(matchupsByLeague);
+
+    const top3HighestScoresTable = generateTop10HighestSingleGameScoresTable(top3HighestScores);
+    const top3LowestScoresTable = generateTop10LowestSingleGameScoresTable(top3LowestScores);
+    const top3ClosestMatchupsTable = generateTop10ClosestMatchupsTable(top3ClosestMatchups);
+
+    return `
+        <div class="container">
+            <h1 class="mb-4">Analysis</h1>
+            ${top3HighestScoresTable}
+            ${top3LowestScoresTable}
+            ${top3ClosestMatchupsTable}
+        </div>
+    `;
+}
+
 // Function to generate the footer section of HTML
 function generateFooter() {
     return `
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.sortable-table').DataTable({
+                    "lengthChange": false,
+                    "searching": false,
+                    "paging": false
+                });
+            });
+        </script>
     `;
 }
-
 
 // Function to generate HTML for all leagues
 function generateHTMLForAllLeagues(matchupsByLeague) {
@@ -370,7 +532,7 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
             ${generateHeader()}
             <body>
                 <div class="container">
-                    <h1 class="mb-4">FFU Matchup History</h1>
+                    <h1 class="mb-4">FFU League History</h1>
                     ${generateLeagueTabs(matchupsByLeague)}
                     <div class="tab-content" id="leagueTabsContent">
                         ${matchupsByLeague.map(({ leagueYears }, index) => `
@@ -389,6 +551,9 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
                         `).join('')}
                         <div class="tab-pane fade" id="content-all-time" role="tabpanel" aria-labelledby="tab-all-time">
                             ${generateAllTimeRegularSeasonSummaryTable(matchupsByLeague)}
+                        </div>
+                        <div class="tab-pane fade" id="content-analysis" role="tabpanel" aria-labelledby="tab-analysis">
+                            ${generateAnalysisTable(matchupsByLeague)}
                         </div>
                     </div>
                 </div>

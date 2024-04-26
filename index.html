@@ -7,119 +7,96 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
             <style>
-            body {
-                padding: 20px;
-                background-color: #f8f9fa;
-                color: #333;
-                font-size: 16px;
-            }
-            .nav-tabs {
-                border: none;
-                border-radius: 10px;
-                margin-bottom: 20px;
-                display: flex;
-                flex-wrap: nowrap;
-            }
-            .nav-tabs .nav-link {
-                color: #333;
-                border: none;
-                background-color: transparent;
-                padding: 10px 15px;
-                margin-right: 5px;
-                border-radius: 10px;
-                transition: background-color 0.3s;
-            }
-            .nav-tabs .nav-link.active {
-                background-color: #dc3545;
-                color: #fff;
-                border: none;
-            }
-            .nav-tabs .nav-link:not(.active):hover {
-                background-color: #eee;
-                color: #333;
-            }
-            .tab-content {
-                padding: 10px;
-            }
-            .table {
-                background-color: #fff;
-                font-size: 14px;
-                width: 100%;
-            }
-            .winner {
-                color: #218838;
-                font-weight: normal;
-            }
-            .loser {
-                color: #c82333;
-                font-weight: normal;
-            }
-            h1, h2, h3, h4, h5, h6 {
-                color: #dc3545;
-                margin-bottom: 15px;
-                text-align: center;
-            }
-            th {
-                font-weight: bold;
-                color: #000;
-            }
-            .nav-link.active {
-                background-color: #dc3545;
-                color: #fff;
-                border-color: #dc3545;
-            }
-            .nav-link {
-                background-color: #fff;
-                color: #dc3545;
-                border-color: #aaa;
-            }
-            .nav-link:hover {
-                background-color: #eee;
-                color: #333;
-            }
-            thead th {
-                color: #000;
-            }
-            .playoff-table tbody tr:nth-child(1) {
-                background-color: rgba(255, 215, 0, 0.5); /* Gold with 50% opacity */
-            }
-            
-            .playoff-table tbody tr:nth-child(2) {
-                background-color: rgba(192, 192, 192, 0.5); /* Silver with 50% opacity */
-            }
-            
-            .playoff-table tbody tr:nth-child(3) {
-                background-color: rgba(205, 133, 63, 0.5); /* Bronze with 50% opacity */
-            }
-            
-            
-        
-            /* Mobile view adjustments */
-            @media (max-width: 767px) {
-                .nav-tabs {
-                    flex-wrap: wrap;
-                    justify-content: center;
+                body {
+                    padding: 20px;
+                    background-color: #f8f9fa;
+                    color: #333;
+                    font-size: 16px;
                 }
-                .nav-link {
-                    flex-grow: 1;
-                    text-align: center;
+                .container {
+                    max-width: 1200px;
+                    margin: auto;
                 }
                 .table-container {
-                    padding: 10px;
-                    border-radius: 0;
-                    margin-bottom: 10px;
-                    box-shadow: none;
-                }
-                .dropdown-menu {
+                    background-color: #fff;
+                    padding: 20px;
                     border-radius: 10px;
+                    margin-bottom: 20px;
+                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
                 }
-            }
-        </style>
+                .nav-tabs {
+                    border: none;
+                    border-radius: 10px;
+                    margin-bottom: 20px;
+                    overflow-x: auto;
+                    display: flex;
+                    flex-wrap: nowrap;
+                }
+                .nav-tabs .nav-link {
+                    color: #333;
+                    border: none;
+                    background-color: transparent;
+                    padding: 10px 15px;
+                    margin-right: 5px;
+                    border-radius: 10px;
+                    transition: background-color 0.3s;
+                }
+                .nav-tabs .nav-link.active {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border: none;
+                }
+                .nav-tabs .nav-link:not(.active):hover {
+                    background-color: #eee;
+                    color: #333;
+                }
+                .tab-content {
+                    padding: 10px;
+                }
+                .table {
+                    background-color: #fff;
+                    font-size: 14px;
+                }
+                .winner {
+                    color: #218838;
+                    font-weight: normal;
+                }
+                .loser {
+                    color: #c82333;
+                    font-weight: normal;
+                }
+                h1, h2, h3, h4, h5, h6 {
+                    color: #dc3545;
+                    margin-bottom: 15px;
+                    text-align: center;
+                }
+                th {
+                    font-weight: bold;
+                    color: #000;
+                }
+                .nav-link.active {
+                    background-color: #dc3545;
+                    color: #fff;
+                    border-color: #dc3545;
+                }
+                .nav-link {
+                    background-color: #fff;
+                    color: #dc3545;
+                    border-color: #aaa;
+                }
+                .nav-link:hover {
+                    background-color: #eee;
+                    color: #333;
+                }
+                thead th {
+                    color: #000;
+                }
+            </style>
         
     
             
                 <div class="container">
-                    <h1 class="mb-4">FFU Matchup History</h1>
+                    <h1 class="mb-4">FFU League History</h1>
                     
         <ul class="nav nav-tabs" id="leagueTabs" role="tablist">
             
@@ -137,6 +114,9 @@
             
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="tab-all-time" data-bs-toggle="tab" data-bs-target="#content-all-time" type="button" role="tab" aria-controls="content-all-time" aria-selected="false">All Time</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="tab-analysis" data-bs-toggle="tab" data-bs-target="#content-analysis" type="button" role="tab" aria-controls="content-analysis" aria-selected="false">Analysis</button>
             </li>
         </ul>
     
@@ -165,9 +145,9 @@
                                         <div class="tab-pane fade show active" id="subcontent-0-0" role="tabpanel" aria-labelledby="subtab-0-0">
                                             
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - 2023</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -176,32 +156,32 @@
                     </thead>
                     <tbody>
                         
-                                <tr>
+                                <tr class="">
                                     <td>1</td>
                                     <td>CamDelphia</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>2</td>
                                     <td>Swaggyp017</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>3</td>
                                     <td>Jamauro</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>4</td>
                                     <td>JoshC94</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>5</td>
                                     <td>ItsAllOgre</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>6</td>
                                     <td>ExtremeSolution</td>
                                 </tr>
@@ -213,7 +193,7 @@
     
                                             
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - 2023</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -1356,9 +1336,9 @@
                                         <div class="tab-pane fade " id="subcontent-0-1" role="tabpanel" aria-labelledby="subtab-0-1">
                                             
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - 2022</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -1367,32 +1347,32 @@
                     </thead>
                     <tbody>
                         
-                                <tr>
+                                <tr class="">
                                     <td>1</td>
                                     <td>CamDelphia</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>2</td>
                                     <td>JoshC94</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>3</td>
                                     <td>Jamauro</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>4</td>
                                     <td>ItsAllOgre</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>5</td>
                                     <td>Hershy4</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>6</td>
                                     <td>Swaggyp017</td>
                                 </tr>
@@ -1404,7 +1384,7 @@
     
                                             
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - 2022</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -2547,9 +2527,9 @@
                                         <div class="tab-pane fade " id="subcontent-0-2" role="tabpanel" aria-labelledby="subtab-0-2">
                                             
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - 2021</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -2558,32 +2538,32 @@
                     </thead>
                     <tbody>
                         
-                                <tr>
+                                <tr class="">
                                     <td>1</td>
                                     <td>TheMurdockle</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>2</td>
                                     <td>DavrilOfKurth</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>3</td>
                                     <td>tylerhoroho</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>4</td>
                                     <td>Haunter151</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>5</td>
                                     <td>JoshC94</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>6</td>
                                     <td>ZachPerk97</td>
                                 </tr>
@@ -2595,7 +2575,7 @@
     
                                             
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - 2021</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -3757,9 +3737,9 @@
                                         <div class="tab-pane fade show active" id="subcontent-1-0" role="tabpanel" aria-labelledby="subtab-1-0">
                                             
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - 2023</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -3768,32 +3748,32 @@
                     </thead>
                     <tbody>
                         
-                                <tr>
+                                <tr class="">
                                     <td>1</td>
                                     <td>holten45</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>2</td>
                                     <td>jvermeulen</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>3</td>
                                     <td>Haunter151</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>4</td>
                                     <td>Dmandre161</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>5</td>
                                     <td>TheMurdockle</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>6</td>
                                     <td>Pressthecot</td>
                                 </tr>
@@ -3805,7 +3785,7 @@
     
                                             
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - 2023</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -4948,9 +4928,9 @@
                                         <div class="tab-pane fade " id="subcontent-1-1" role="tabpanel" aria-labelledby="subtab-1-1">
                                             
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - 2022</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -4959,32 +4939,32 @@
                     </thead>
                     <tbody>
                         
-                                <tr>
+                                <tr class="">
                                     <td>1</td>
                                     <td>cjcolip</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>2</td>
                                     <td>TCoolDaGoat</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>3</td>
                                     <td>ExtremeSolution</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>4</td>
                                     <td>Pressthecot</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>5</td>
                                     <td>ChicagoPick6</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>6</td>
                                     <td>elliotbonus</td>
                                 </tr>
@@ -4996,7 +4976,7 @@
     
                                             
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - 2022</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -6162,9 +6142,9 @@
                                         <div class="tab-pane fade show active" id="subcontent-2-0" role="tabpanel" aria-labelledby="subtab-2-0">
                                             
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - 2023</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -6173,32 +6153,32 @@
                     </thead>
                     <tbody>
                         
-                                <tr>
+                                <tr class="">
                                     <td>1</td>
                                     <td>LegendsRise</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>2</td>
                                     <td>DaKoons86</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>3</td>
                                     <td>bobbylight4893</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>4</td>
                                     <td>stupidjack13</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>5</td>
                                     <td>Jacamart</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>6</td>
                                     <td>tylersanford</td>
                                 </tr>
@@ -6210,7 +6190,7 @@
     
                                             
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - 2023</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -7353,9 +7333,9 @@
                                         <div class="tab-pane fade " id="subcontent-2-1" role="tabpanel" aria-labelledby="subtab-2-1">
                                             
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - 2022</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -7364,32 +7344,32 @@
                     </thead>
                     <tbody>
                         
-                                <tr>
+                                <tr class="">
                                     <td>1</td>
                                     <td>ShowBizKitten</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>2</td>
                                     <td>holten45</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>3</td>
                                     <td>qu1nly</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>4</td>
                                     <td>setorines</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>5</td>
                                     <td>KayleeConley</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>6</td>
                                     <td>stupidjack13</td>
                                 </tr>
@@ -7401,7 +7381,7 @@
     
                                             
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - 2022</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -8544,9 +8524,9 @@
                                         <div class="tab-pane fade " id="subcontent-2-2" role="tabpanel" aria-labelledby="subtab-2-2">
                                             
         <div class="table-container">
-            <h2 class="mb-3">Playoff Finishes - 2021</h2>
+            <h2 class="mb-3">Playoff Finishes</h2>
             <div class="table-responsive">
-                <table class="table playoff-table">
+                <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
@@ -8555,32 +8535,32 @@
                     </thead>
                     <tbody>
                         
-                                <tr>
+                                <tr class="">
                                     <td>1</td>
                                     <td>Yensen</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>2</td>
                                     <td>Hershy4</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>3</td>
                                     <td>chetmaynard</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>4</td>
                                     <td>CamDelphia</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>5</td>
                                     <td>TCoolDaGoat</td>
                                 </tr>
                             
-                                <tr>
+                                <tr class="">
                                     <td>6</td>
                                     <td>ItsAllOgre</td>
                                 </tr>
@@ -8592,7 +8572,7 @@
     
                                             
         <div class="table-container">
-            <h2 class="mb-3">Regular Season Summary - 2021</h2>
+            <h2 class="mb-3">Regular Season Summary</h2>
             <div class="table-responsive">
                 <table class="table sortable-table">
                     <thead>
@@ -10173,12 +10153,310 @@
         </div>
     
                         </div>
+                        <div class="tab-pane fade" id="content-analysis" role="tabpanel" aria-labelledby="tab-analysis">
+                            
+        <div class="container">
+            <h1 class="mb-4">Analysis</h1>
+            
+        <div class="table-container">
+            <h2 class="mb-3">Top 10 Highest Single Game Scores</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Score</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Week</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr>
+                                <td>setorines</td>
+                                <td>206.1</td>
+                                <td>2022</td>
+                                <td>5</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>KayleeConley</td>
+                                <td>189.7</td>
+                                <td>2023</td>
+                                <td>5</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>JoshC94</td>
+                                <td>184.95</td>
+                                <td>2023</td>
+                                <td>15</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Dmandre161</td>
+                                <td>184.25</td>
+                                <td>2023</td>
+                                <td>15</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Jamauro</td>
+                                <td>184.1</td>
+                                <td>2023</td>
+                                <td>8</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>ExtremeSolution</td>
+                                <td>182.6</td>
+                                <td>2023</td>
+                                <td>1</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>chetmaynard</td>
+                                <td>180.65</td>
+                                <td>2021</td>
+                                <td>11</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Haunter151</td>
+                                <td>180.25</td>
+                                <td>2021</td>
+                                <td>2</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>CamDelphia</td>
+                                <td>176.85</td>
+                                <td>2021</td>
+                                <td>14</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>tylerhoroho</td>
+                                <td>175.85</td>
+                                <td>2021</td>
+                                <td>17</td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+            
+        <div class="table-container">
+            <h2 class="mb-3">Top 10 Lowest Single Game Scores</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">User</th>
+                            <th scope="col">Score</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Week</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr>
+                                <td>dylanhallaback</td>
+                                <td>41.6</td>
+                                <td>2021</td>
+                                <td>16</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Jamauro</td>
+                                <td>43.3</td>
+                                <td>2021</td>
+                                <td>7</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>ChicagoPick6</td>
+                                <td>44.8</td>
+                                <td>2021</td>
+                                <td>10</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>DavrilOfKurth</td>
+                                <td>45.5</td>
+                                <td>2023</td>
+                                <td>1</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>oliverhindman</td>
+                                <td>46.8</td>
+                                <td>2022</td>
+                                <td>7</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>bstarrr</td>
+                                <td>51.5</td>
+                                <td>2023</td>
+                                <td>9</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Dmandre161</td>
+                                <td>52.15</td>
+                                <td>2023</td>
+                                <td>1</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>setorines</td>
+                                <td>53</td>
+                                <td>2023</td>
+                                <td>17</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>ZachPerk97</td>
+                                <td>55.45</td>
+                                <td>2021</td>
+                                <td>10</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Drixxlepix48</td>
+                                <td>57.3</td>
+                                <td>2022</td>
+                                <td>7</td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+            
+        <div class="table-container">
+            <h2 class="mb-3">Top 10 Closest Matchups</h2>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Winner</th>
+                            <th scope="col">Loser</th>
+                            <th scope="col">Difference</th>
+                            <th scope="col">Year</th>
+                            <th scope="col">Week</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                            <tr>
+                                <td>JoshC94</td>
+                                <td>ItsAllOgre</td>
+                                <td>0.05</td>
+                                <td>2023</td>
+                                <td>7</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>ChicagoPick6</td>
+                                <td>Jacamart</td>
+                                <td>0.10</td>
+                                <td>2021</td>
+                                <td>1</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Yensen</td>
+                                <td>JoshC94</td>
+                                <td>0.15</td>
+                                <td>2022</td>
+                                <td>2</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>jvermeulen</td>
+                                <td>DaKoons86</td>
+                                <td>0.15</td>
+                                <td>2022</td>
+                                <td>16</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>mitchreeves1887</td>
+                                <td>LegendsRise</td>
+                                <td>0.20</td>
+                                <td>2022</td>
+                                <td>6</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Yensen</td>
+                                <td>Hershy4</td>
+                                <td>0.25</td>
+                                <td>2022</td>
+                                <td>1</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>qu1nly</td>
+                                <td>GooberX</td>
+                                <td>0.25</td>
+                                <td>2023</td>
+                                <td>12</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>ChicagoPick6</td>
+                                <td>dylanhallaback</td>
+                                <td>0.45</td>
+                                <td>2021</td>
+                                <td>2</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>Haunter151</td>
+                                <td>dylanhallaback</td>
+                                <td>0.50</td>
+                                <td>2021</td>
+                                <td>10</td>
+                            </tr>
+                        
+                            <tr>
+                                <td>ItsAllOgre</td>
+                                <td>Hershy4</td>
+                                <td>0.60</td>
+                                <td>2021</td>
+                                <td>9</td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    
+        </div>
+    
+                        </div>
                     </div>
                 </div>
                 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.sortable-table').DataTable({
+                    "lengthChange": false,
+                    "searching": false,
+                    "paging": false
+                });
+            });
+        </script>
     
             
         
