@@ -148,6 +148,19 @@ function generateHeader() {
             thead th {
                 color: #000;
             }
+            .playoff-table tbody tr:nth-child(1) {
+                background-color: rgba(255, 215, 0, 0.5); /* Gold with 50% opacity */
+            }
+            
+            .playoff-table tbody tr:nth-child(2) {
+                background-color: rgba(192, 192, 192, 0.5); /* Silver with 50% opacity */
+            }
+            
+            .playoff-table tbody tr:nth-child(3) {
+                background-color: rgba(205, 133, 63, 0.5); /* Bronze with 50% opacity */
+            }
+            
+            
         
             /* Mobile view adjustments */
             @media (max-width: 767px) {
@@ -209,7 +222,7 @@ function generatePlayoffFinishesTable(playoffInfo, year) {
         <div class="table-container">
             <h2 class="mb-3">Playoff Finishes - ${year}</h2>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table playoff-table">
                     <thead>
                         <tr>
                             <th scope="col">Place</th>
