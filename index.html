@@ -7,91 +7,101 @@
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
             <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
             <style>
-                body {
-                    padding: 20px;
-                    background-color: #f8f9fa;
-                    color: #333;
-                    font-size: 16px;
-                }
-                .container {
-                    max-width: 1200px;
-                    margin: auto;
-                }
-                .table-container {
-                    background-color: #fff;
-                    padding: 20px;
-                    border-radius: 10px;
-                    margin-bottom: 20px;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-                }
+            body {
+                padding: 20px;
+                background-color: #f8f9fa;
+                color: #333;
+                font-size: 16px;
+            }
+            .nav-tabs {
+                border: none;
+                border-radius: 10px;
+                margin-bottom: 20px;
+                display: flex;
+                flex-wrap: nowrap;
+            }
+            .nav-tabs .nav-link {
+                color: #333;
+                border: none;
+                background-color: transparent;
+                padding: 10px 15px;
+                margin-right: 5px;
+                border-radius: 10px;
+                transition: background-color 0.3s;
+            }
+            .nav-tabs .nav-link.active {
+                background-color: #dc3545;
+                color: #fff;
+                border: none;
+            }
+            .nav-tabs .nav-link:not(.active):hover {
+                background-color: #eee;
+                color: #333;
+            }
+            .tab-content {
+                padding: 10px;
+            }
+            .table {
+                background-color: #fff;
+                font-size: 14px;
+                width: 100%;
+            }
+            .winner {
+                color: #218838;
+                font-weight: normal;
+            }
+            .loser {
+                color: #c82333;
+                font-weight: normal;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                color: #dc3545;
+                margin-bottom: 15px;
+                text-align: center;
+            }
+            th {
+                font-weight: bold;
+                color: #000;
+            }
+            .nav-link.active {
+                background-color: #dc3545;
+                color: #fff;
+                border-color: #dc3545;
+            }
+            .nav-link {
+                background-color: #fff;
+                color: #dc3545;
+                border-color: #aaa;
+            }
+            .nav-link:hover {
+                background-color: #eee;
+                color: #333;
+            }
+            thead th {
+                color: #000;
+            }
+        
+            /* Mobile view adjustments */
+            @media (max-width: 767px) {
                 .nav-tabs {
-                    border: none;
-                    border-radius: 10px;
-                    margin-bottom: 20px;
-                    overflow-x: auto;
-                    display: flex;
-                    flex-wrap: nowrap;
-                }
-                .nav-tabs .nav-link {
-                    color: #333;
-                    border: none;
-                    background-color: transparent;
-                    padding: 10px 15px;
-                    margin-right: 5px;
-                    border-radius: 10px;
-                    transition: background-color 0.3s;
-                }
-                .nav-tabs .nav-link.active {
-                    background-color: #dc3545;
-                    color: #fff;
-                    border: none;
-                }
-                .nav-tabs .nav-link:not(.active):hover {
-                    background-color: #eee;
-                    color: #333;
-                }
-                .tab-content {
-                    padding: 10px;
-                }
-                .table {
-                    background-color: #fff;
-                    font-size: 14px;
-                }
-                .winner {
-                    color: #218838;
-                    font-weight: normal;
-                }
-                .loser {
-                    color: #c82333;
-                    font-weight: normal;
-                }
-                h1, h2, h3, h4, h5, h6 {
-                    color: #dc3545;
-                    margin-bottom: 15px;
-                    text-align: center;
-                }
-                th {
-                    font-weight: bold;
-                    color: #000;
-                }
-                .nav-link.active {
-                    background-color: #dc3545;
-                    color: #fff;
-                    border-color: #dc3545;
+                    flex-wrap: wrap;
+                    justify-content: center;
                 }
                 .nav-link {
-                    background-color: #fff;
-                    color: #dc3545;
-                    border-color: #aaa;
+                    flex-grow: 1;
+                    text-align: center;
                 }
-                .nav-link:hover {
-                    background-color: #eee;
-                    color: #333;
+                .table-container {
+                    padding: 10px;
+                    border-radius: 0;
+                    margin-bottom: 10px;
+                    box-shadow: none;
                 }
-                thead th {
-                    color: #000;
+                .dropdown-menu {
+                    border-radius: 10px;
                 }
-            </style>
+            }
+        </style>
         
     
             
@@ -10154,18 +10164,8 @@
                 </div>
                 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-        <script type="text/javascript" src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('.sortable-table').DataTable({
-                    "lengthChange": false,
-                    "searching": false,
-                    "paging": false
-                });
-            });
-        </script>
+        <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
     
             
         
