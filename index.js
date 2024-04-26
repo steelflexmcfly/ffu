@@ -331,7 +331,7 @@ function generateLeagueTabs(matchupsByLeague) {
                 <button class="nav-link" id="tab-all-time" data-bs-toggle="tab" data-bs-target="#content-all-time" type="button" role="tab" aria-controls="content-all-time" aria-selected="false">All Time</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="tab-analysis" data-bs-toggle="tab" data-bs-target="#content-analysis" type="button" role="tab" aria-controls="content-analysis" aria-selected="false">Analysis</button>
+                <button class="nav-link" id="tab-records" data-bs-toggle="tab" data-bs-target="#content-records" type="button" role="tab" aria-controls="content-records" aria-selected="false">Records</button>
             </li>
         </ul>
     `;
@@ -483,8 +483,8 @@ function generateAllTimeRegularSeasonSummaryTable(matchupsByLeague) {
     `;
 }
 
-// Function to generate the HTML for analysis tab
-function generateAnalysisTable(matchupsByLeague) {
+// Function to generate the HTML for records tab
+function generateRecordsTable(matchupsByLeague) {
     const top3HighestScores = calculateTop10HighestSingleGameScores(matchupsByLeague);
     const top3LowestScores = calculateTop10LowestSingleGameScores(matchupsByLeague);
     const top3ClosestMatchups = calculateTop10ClosestMatchups(matchupsByLeague);
@@ -495,7 +495,6 @@ function generateAnalysisTable(matchupsByLeague) {
 
     return `
         <div class="container">
-            <h1 class="mb-4">Analysis</h1>
             ${top3HighestScoresTable}
             ${top3LowestScoresTable}
             ${top3ClosestMatchupsTable}
@@ -552,8 +551,8 @@ function generateHTMLForAllLeagues(matchupsByLeague) {
                         <div class="tab-pane fade" id="content-all-time" role="tabpanel" aria-labelledby="tab-all-time">
                             ${generateAllTimeRegularSeasonSummaryTable(matchupsByLeague)}
                         </div>
-                        <div class="tab-pane fade" id="content-analysis" role="tabpanel" aria-labelledby="tab-analysis">
-                            ${generateAnalysisTable(matchupsByLeague)}
+                        <div class="tab-pane fade" id="content-records" role="tabpanel" aria-labelledby="tab-records">
+                            ${generateRecordsTable(matchupsByLeague)}
                         </div>
                     </div>
                 </div>
