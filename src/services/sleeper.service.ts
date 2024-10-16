@@ -1,3 +1,4 @@
+import { LEAGUE_IDS } from "../config/consts";
 import { LeagueInfoResponse, LeagueRostersResponse } from "../models/models";
 
 export class SleeperService {
@@ -8,7 +9,7 @@ export class SleeperService {
         return response.json();
     }
 
-    public async getLeagueInfo(leagueId: string): Promise<LeagueInfoResponse> {
+    public async getLeagueInfo(leagueId: string): Promise<any> {
         const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}`);
         return response.json();
     }
@@ -18,12 +19,17 @@ export class SleeperService {
         return response.json();
     }
 
-    public async getRosters(leagueId: string): Promise<LeagueRostersResponse> {
+    public async getUsers(leagueId: string): Promise<any> {
         const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/users`);
         return response.json();
     }
 
-    public async getMatchupsByWeek(leagueId: string, week: number): Promise<LeagueRostersResponse> {
+    public async getRosters(leagueId: string): Promise<any> {
+        const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/rosters`);
+        return response.json();
+    }
+
+    public async getMatchupsByWeek(leagueId: string, week: number): Promise<any> {
         const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/matchups/${week}`);
         return response.json();
     }
@@ -39,5 +45,24 @@ export class SleeperService {
             return [leagueId];
         }
         return pastLeagueIds;
+    }
+
+    // Helper to get all username - userId mappings
+    public async getAllUserIds(): Promise<any> {
+        const usernameIdMap = new Map<string, string>();
+        const leagueIds: string[] = [
+            ...Object.values(LEAGUE_IDS.PREMIER),
+            ...Object.values(LEAGUE_IDS.MASTERS),
+            ...Object.values(LEAGUE_IDS.NATIONAL)
+        ];
+        await Promise.all(leagueIds.map(async id => {
+            const rosters = await this.getUsers(id);
+            rosters.forEach((roster: { display_name: string; user_id: string; }) => {
+                if (!usernameIdMap.get(roster.display_name)) {
+                    usernameIdMap.set(roster.display_name, roster.user_id)
+                }
+            })
+        }));
+        console.log(usernameIdMap);
     }
 }
