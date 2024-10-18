@@ -1,5 +1,5 @@
 import { LEAGUE_IDS } from "../config/consts";
-import { LeagueInfoResponse, LeagueRostersResponse } from "../models/models";
+import { LeagueInfoResponse, LeagueRostersResponse } from "../models/sleeper-api";
 
 export class SleeperService {
 

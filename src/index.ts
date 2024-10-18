@@ -10,8 +10,8 @@ async function main() {
   const league = new LeagueService(sleeper);
   // const data = await sleeper.getAllUserIds();
   // const player = players.getPlayerById('');
-  const data = await league.describeMatchupsForWeek(LEAGUE_IDS.PREMIER[2024], 6);
-  fs.writeFileSync('output.json', JSON.stringify(data));
+  const data = await league.getMatchupsForAllLeagues();
+  fs.writeFileSync('output.json', JSON.stringify(data));     
 }
 
 main();
