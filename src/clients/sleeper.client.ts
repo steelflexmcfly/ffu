@@ -1,7 +1,7 @@
 import { LEAGUE_IDS } from "../config/consts";
-import { LeagueInfoResponse, LeagueRostersResponse } from "../models/sleeper-api";
+import { PlayoffData, PlayoffResponse } from "../models/sleeper-api";
 
-export class SleeperService {
+export class SleeperClient {
 
     // ** Call sparingly, over 5MB returned **
     public async getPlayerData(): Promise<any> {
@@ -32,6 +32,56 @@ export class SleeperService {
     public async getMatchupsByWeek(leagueId: string, week: number): Promise<any> {
         const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/matchups/${week}`);
         return response.json();
+    }
+
+    public async getWinnersBracket(leagueId: string): Promise<PlayoffData[]> {
+        const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/winners_bracket`);
+        const body: PlayoffResponse[] = await response.json();
+        console.log(body)
+        const playoffData: PlayoffData[] = body.map(b => {
+            return {
+                round: b.r,
+                matchId: b.m,
+                teamOne: b.t1,
+                teamTwo: b.t2,
+                winnerId: b.w,
+                loserId: b.l,
+                teamOneFrom: {
+                    winFromId: b.t1_from?.w,
+                    loseFromId: b.t1_from?.l
+                },
+                teamTwoFrom: {
+                    winFromId: b.t2_from?.w,
+                    loseFromId: b.t2_from?.l
+                }
+            }
+        });
+        return playoffData;
+    }
+
+    public async getLosersBracket(leagueId: string): Promise<PlayoffData[]> {
+        const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/losers_bracket`);
+        const body: PlayoffResponse[] = await response.json();
+        console.log(body)
+        const playoffData: PlayoffData[] = body.map(b => {
+            return {
+                round: b.r,
+                matchId: b.m,
+                teamOne: b.t1,
+                teamTwo: b.t2,
+                winnerId: b.w,
+                loserId: b.l,
+                teamOneFrom: {
+                    winFromId: b.t1_from?.w,
+                    loseFromId: b.t1_from?.l
+                },
+                teamTwoFrom: {
+                    winFromId: b.t2_from?.w,
+                    loseFromId: b.t2_from?.l
+                }
+            }
+        });
+        return playoffData;
     }
 
     // Helper function used to get list of all current and past league IDs for a given league

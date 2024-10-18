@@ -65,3 +65,36 @@ export interface LeagueWeekMatchupResponse {
     players: number[];
     players_points: number[];
 }
+
+export interface PlayoffResponse {
+    r: number;
+    m: number;
+    t1: number;
+    t2: number;
+    w: number;
+    l: number;
+    t1_from: {
+        w?: number;
+        l?: number;
+    },
+    t2_from: {
+        w?: number;
+        l?: number;
+    }
+}
+export interface PlayoffData {
+    round: number;
+    matchId: number;
+    teamOne: number;
+    teamTwo: number;
+    winnerId: number;
+    loserId: number;
+    teamOneFrom: {
+        winFromId: number;
+        loseFromId: number;
+    },
+    teamTwoFrom: {
+        winFromId: number;
+        loseFromId: number;
+    }
+}

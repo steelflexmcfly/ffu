@@ -1,10 +1,10 @@
 import { LEAGUE_IDS, USER_IDS } from "../config/consts";
 import { WeekMatchup } from "../models/matchups";
-import { SleeperService } from "./sleeper.service";
+import { SleeperClient } from "../clients/sleeper.client";
 
 export class LeagueService {
 
-    constructor(private sleeper: SleeperService) { }
+    constructor(private sleeper: SleeperClient) { }
 
     public async getMatchupsForAllLeagues() {
         const premierLeagueYears = Object.entries(LEAGUE_IDS['PREMIER']);
