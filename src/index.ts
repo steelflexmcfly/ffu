@@ -15,7 +15,7 @@ async function main() {
   // const data = await playoffs.getPlayoffsForLeague(LEAGUE_IDS["PREMIER"][2023]);
   // const data = await league.getMatchupsForWeek(LEAGUE_IDS.NATIONAL[2024], 7);
   // const user = await sleeper.getRosters(LEAGUE_IDS.NATIONAL[2024]);
-  fs.writeFileSync('output.json', JSON.stringify(data));     
+  fs.writeFileSync('./output/all-matchups.json', JSON.stringify(data));     
 }
 
 main();
