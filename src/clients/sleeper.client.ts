@@ -37,7 +37,6 @@ export class SleeperClient {
     public async getWinnersBracket(leagueId: string): Promise<PlayoffData[]> {
         const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/winners_bracket`);
         const body: PlayoffResponse[] = await response.json();
-        console.log(body)
         const playoffData: PlayoffData[] = body.map(b => {
             return {
                 round: b.r,
@@ -62,7 +61,6 @@ export class SleeperClient {
     public async getLosersBracket(leagueId: string): Promise<PlayoffData[]> {
         const response = await fetch(`https://api.sleeper.app/v1/league/${leagueId}/losers_bracket`);
         const body: PlayoffResponse[] = await response.json();
-        console.log(body)
         const playoffData: PlayoffData[] = body.map(b => {
             return {
                 round: b.r,
@@ -97,6 +95,20 @@ export class SleeperClient {
         return pastLeagueIds;
     }
 
+    public async getRosterIdToOwnerIdMap(leagueId: string): Promise<any> {
+        try {
+            const rosters = await this.getRosters(leagueId);
+            const rosterIdToOwnerIdMap = {};
+            rosters.forEach(roster => {
+                rosterIdToOwnerIdMap[roster.roster_id] = roster.owner_id;
+            });
+            return rosterIdToOwnerIdMap;
+        } catch (error) {
+            console.error('Error fetching roster data:', error);
+            return null;
+        }
+    }
+
     // Helper to get all username - userId mappings
     public async getAllUserIds(): Promise<any> {
         const usernameIdMap = new Map<string, string>();
@@ -113,6 +125,5 @@ export class SleeperClient {
                 }
             })
         }));
-        console.log(usernameIdMap);
     }
 }
