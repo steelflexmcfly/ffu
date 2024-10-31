@@ -1,26 +1,8 @@
 import leagueData from '../../output/all-matchups.json';
 import * as fs from 'fs';
+import { USER_IDS_INFO_MAP } from '../config/consts';
+import { CrossLeagueData, LeagueMatchup, LeagueWeek, LeagueYear } from '../models/matchups';
 
-type CrossLeagueData = {
-    [key in "premier" | "masters" | "national"]: LeagueYear[];
-};
-
-type LeagueYear = {
-    year: string;
-    matchupsByWeek: LeagueWeek[];
-};
-
-type LeagueWeek = {
-    week: number;
-    matchups: LeagueMatchup[];
-}
-
-type LeagueMatchup = {
-    winner: string;
-    loser: string;
-    winnerScore: number;
-    loserScore: number;
-}
 
 function buildYearlyMatchupTables(league: LeagueYear[], leagueName: string) {
     return league.map(season => buildSingleYearMatchups(season, leagueName)).join('');
@@ -32,7 +14,7 @@ function buildSingleYearMatchups(season: LeagueYear, leagueName: string) {
 
 function buildWeekMatchips(week: LeagueWeek) {
     return `
-        <h3>${week.week}</h3>
+        <h3>Week ${week.week}</h3>
         <table>
             <tr>
                 <th>Winner</th>
@@ -48,10 +30,10 @@ function buildWeekMatchips(week: LeagueWeek) {
 function buildMatchup(matchup: LeagueMatchup) {
     return `
         <tr>
-            <td>${matchup.winner}</td>
+            <td>${USER_IDS_INFO_MAP[matchup.winner].teamName}</td>
             <td>${matchup.winnerScore}</td>
             <td>${matchup.loserScore}</td>
-            <td>${matchup.loser}</td>
+            <td>${USER_IDS_INFO_MAP[matchup.loser].teamName}</td>
         </tr>
     `;
 }

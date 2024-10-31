@@ -29,6 +29,7 @@ export class LeagueService {
                     const matchups = await this.getAllMatchupsForLeague(leagueId);
                     return {
                         year,
+                        leagueId,
                         matchupsByWeek: matchups
                     }
                 }
@@ -69,8 +70,8 @@ export class LeagueService {
             if (groupedMatchups.hasOwnProperty(matchupId)) {
                 const matchups = groupedMatchups[matchupId];
                 if (matchups.length === 2) {
-                    const user1 = USER_IDS_INFO_MAP[rosterUserMap[matchups[0].roster_id]].teamName || 'Unknown User';
-                    const user2 = USER_IDS_INFO_MAP[rosterUserMap[matchups[1].roster_id]].teamName || 'Unknown User';
+                    const user1 = rosterUserMap[matchups[0].roster_id] || 'Unknown User';
+                    const user2 = rosterUserMap[matchups[1].roster_id] || 'Unknown User';
                     const score1 = matchups[0].points;
                     const score2 = matchups[1].points;
                     const winner = score1 > score2 ? user1 : user2;
