@@ -1,4 +1,4 @@
-import players from '../config/player-data.json';
+import players from '../config/player-data.json' with { type: "json" };;
 
 export class PlayerService {
     

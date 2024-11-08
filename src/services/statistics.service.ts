@@ -1,6 +1,6 @@
-import { LEAGUE_IDS, USER_IDS_INFO_MAP } from "../config/consts";
-import leagueData from '../../output/all-matchups.json';
-import { LeagueWeek, LeagueYear, WeekMatchup } from "../models/matchups";
+import { LEAGUE_IDS, USER_IDS_INFO_MAP } from "../config/consts.js";
+import leagueData from '../../output/all-matchups.json' with { type: "json" };;
+import { LeagueWeek, LeagueYear, WeekMatchup } from "../models/matchups.js";
 
 interface MemberStatMapObject {
     wins: number;

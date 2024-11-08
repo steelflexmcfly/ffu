@@ -1,5 +1,5 @@
-import { LEAGUE_IDS } from "../config/consts";
-import { PlayoffData, PlayoffResponse } from "../models/sleeper-api";
+import { LEAGUE_IDS } from "../config/consts.js";
+import { PlayoffData, PlayoffResponse } from "../models/sleeper-api.js";
 
 export class SleeperClient {
 

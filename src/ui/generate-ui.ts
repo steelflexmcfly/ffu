@@ -1,7 +1,7 @@
-import leagueData from '../../output/all-matchups.json';
+import leagueData from '../../output/all-matchups.json' with { type: "json" };;
 import * as fs from 'fs';
-import { USER_IDS_INFO_MAP } from '../config/consts';
-import { CrossLeagueData, LeagueMatchup, LeagueWeek, LeagueYear } from '../models/matchups';
+import { USER_IDS_INFO_MAP } from '../config/consts.js';
+import { CrossLeagueData, LeagueMatchup, LeagueWeek, LeagueYear } from '../models/matchups.js';
 
 
 function buildYearlyMatchupTables(league: LeagueYear[], leagueName: string) {

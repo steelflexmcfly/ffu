@@ -1,6 +1,6 @@
-import { LEAGUE_IDS, USER_IDS, USER_IDS_INFO_MAP } from "../config/consts";
-import { WeekMatchup } from "../models/matchups";
-import { SleeperClient } from "../clients/sleeper.client";
+import { LEAGUE_IDS, USER_IDS, USER_IDS_INFO_MAP } from "../config/consts.js";
+import { WeekMatchup } from "../models/matchups.js";
+import { SleeperClient } from "../clients/sleeper.client.js";
 
 export class LeagueService {
 

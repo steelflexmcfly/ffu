@@ -1,6 +1,6 @@
-import { SleeperClient } from "../clients/sleeper.client";
-import { USER_IDS } from "../config/consts";
-import { PlayoffData, PlayoffResponse } from "../models/sleeper-api";
+import { SleeperClient } from "../clients/sleeper.client.js";
+import { USER_IDS } from "../config/consts.js";
+import { PlayoffData, PlayoffResponse } from "../models/sleeper-api.js";
 
 export class PlayoffService {
 
