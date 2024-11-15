@@ -40,12 +40,10 @@ export class LeagueService {
     async getMatchupsForWeek(leagueId, week) {
         const rosters = await this.sleeper.getRosters(leagueId);
         const matchups = await this.sleeper.getMatchupsByWeek(leagueId, week);
-        console.log('here 1');
         const rosterUserMap = {};
         rosters.forEach((roster) => {
             rosterUserMap[roster.roster_id] = roster.owner_id;
         });
-        console.log('here 2');
         const groupedMatchups = {};
         matchups.forEach((matchup) => {
             const matchupId = matchup.matchup_id;
@@ -54,7 +52,6 @@ export class LeagueService {
             }
             groupedMatchups[matchupId].push(matchup);
         });
-        console.log('here 3');
         // Create pairs of matchups
         const condensedMatchups = [];
         for (const matchupId in groupedMatchups) {
@@ -73,7 +70,6 @@ export class LeagueService {
                 }
             }
         }
-        console.log('here 4');
         return condensedMatchups;
     }
 }

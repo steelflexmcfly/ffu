@@ -3,7 +3,8 @@ import { SleeperClient } from "../clients/sleeper.client.js"
 import { LeagueService } from "../services/league.service.js";
 import { PlayoffService } from "../services/playoff.service.js";
 import { StatisticsService } from "../services/statistics.service.js";
-import { LEAGUE_IDS } from "../config/consts.js";
+import { LEAGUE_IDS, USER_IDS_INFO_MAP } from "../config/consts.js";
+import { WeekMatchup } from "../models/matchups.js";
 
 export default class Controller {
     league: LeagueService;
@@ -14,12 +15,19 @@ export default class Controller {
 
     async getMatchupsForWeek(req: Request, res: Response) {
         try {
-            const league = req.params.league;
+            const league = req.params.league.toUpperCase();
             const year = req.params.year;
             const week = +req.params.week;
             console.log(league, year, week);
-            const data = await this.league.getMatchupsForWeek(LEAGUE_IDS[league][year], week);
-            res.status(200).json(data);
+            const data: WeekMatchup[] = await this.league.getMatchupsForWeek(LEAGUE_IDS[league][year], week);
+            const mappedData = data.map(matchup => {
+                return {
+                    ...matchup,
+                    winner: USER_IDS_INFO_MAP[matchup.winner].teamName,
+                    loser: USER_IDS_INFO_MAP[matchup.loser].teamName
+                }
+            })
+            res.status(200).json(mappedData);
         }catch (err) {
             console.log(err);
             res.status(500).json({
